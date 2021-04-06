@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
-class AddAppointments extends Component {
+class AddInterviews extends Component {
   constructor() {
     super();
     this.state = {
-      petName: '',
-      ownerName: '',
-      aptDate: '',
-      aptTime: '',
-      aptNotes: ''
+      companyName: '',
+      intName: '',
+      intDate: '',
+      intTime: '',
+      intNotes: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -17,21 +17,21 @@ class AddAppointments extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    let tempApt = {
-      petName: this.state.petName,
-      ownerName: this.state.ownerName,
-      aptDate: this.state.aptDate + ' ' + this.state.aptTime,
-      aptNotes: this.state.aptNotes
+    let tempInt = {
+      companyName: this.state.companyName,
+      intName: this.state.intName,
+      intDate: this.state.intDate + ' ' + this.state.intTime,
+      intNotes: this.state.intNotes
     };
-
-    this.props.addAppointment(tempApt);
+    
+    this.props.addInterview(tempInt);
 
     this.setState({
-      petName: '',
-      ownerName: '',
-      aptDate: '',
-      aptTime: '',
-      aptNotes: ''
+      companyName: '',
+      intName: '',
+      intDate: '',
+      intTime: '',
+      intNotes: ''
     });
     this.props.toggleForm();
   }
@@ -51,33 +51,33 @@ class AddAppointments extends Component {
       <div
         className={
           'card textcenter mt-3 ' +
-          (this.props.formDisplay ? '' : 'add-appointment')
+          (this.props.formDisplay ? '' : 'Add Interview Visible')
         }
       >
         <div
-          className="apt-addheading card-header bg-primary text-white"
+          className="int-addheading card-header bg-primary text-white"
           onClick={this.props.toggleForm}
         >
-          <FaPlus /> Add Appointment
+          <FaPlus /> Add Interview
         </div>
 
         <div className="card-body">
-          <form id="aptForm" noValidate onSubmit={this.handleAdd}>
+          <form id="intForm" noValidate onSubmit={this.handleAdd}>
             <div className="form-group form-row">
               <label
                 className="col-md-2 col-form-label text-md-right"
-                htmlFor="petName"
+                htmlFor="companyName"
                 readOnly
               >
-                Pet Name
+                Company Name
               </label>
               <div className="col-md-10">
                 <input
                   type="text"
                   className="form-control"
-                  name="petName"
-                  placeholder="Pet's Name"
-                  value={this.state.petName}
+                  name="companyName"
+                  placeholder="Company Name"
+                  value={this.state.companyName}
                   onChange={this.handleChange}
                 />
               </div>
@@ -86,17 +86,17 @@ class AddAppointments extends Component {
             <div className="form-group form-row">
               <label
                 className="col-md-2 col-form-label text-md-right"
-                htmlFor="ownerName"
+                htmlFor="intName"
               >
-                Pet Owner
+                Interviewer Name
               </label>
               <div className="col-md-10">
                 <input
                   type="text"
                   className="form-control"
-                  name="ownerName"
-                  placeholder="Owner's Name"
-                  value={this.state.ownerName}
+                  name="intName"
+                  placeholder="Interviewers Name"
+                  value={this.state.intName}
                   onChange={this.handleChange}
                 />
               </div>
@@ -105,7 +105,7 @@ class AddAppointments extends Component {
             <div className="form-group form-row">
               <label
                 className="col-md-2 col-form-label text-md-right"
-                htmlFor="aptDate"
+                htmlFor="intDate"
               >
                 Date
               </label>
@@ -113,15 +113,15 @@ class AddAppointments extends Component {
                 <input
                   type="date"
                   className="form-control"
-                  name="aptDate"
-                  id="aptDate"
-                  value={this.state.aptDate}
+                  name="intDate"
+                  id="intDate"
+                  value={this.state.intDate}
                   onChange={this.handleChange}
                 />
               </div>
               <label
                 className="col-md-2 col-form-label text-md-right"
-                htmlFor="aptTime"
+                htmlFor="intTime"
               >
                 Time
               </label>
@@ -129,27 +129,27 @@ class AddAppointments extends Component {
                 <input
                   type="time"
                   className="form-control"
-                  name="aptTime"
-                  id="aptTime"
-                  value={this.state.aptTime}
+                  name="intTime"
+                  id="intTime"
+                  value={this.state.intTime}
                   onChange={this.handleChange}
                 />
               </div>
             </div>
 
             <div className="form-group form-row">
-              <label className="col-md-2 text-md-right" htmlFor="aptNotes">
-                Apt. Notes
+              <label className="col-md-2 text-md-right" htmlFor="intNotes">
+                Interview Notes
               </label>
               <div className="col-md-10">
                 <textarea
                   className="form-control"
                   rows="4"
                   cols="50"
-                  name="aptNotes"
-                  id="aptNotes"
-                  placeholder="Appointment Notes"
-                  value={this.state.aptNotes}
+                  name="intNotes"
+                  id="intNotes"
+                  placeholder="Interview Notes"
+                  value={this.state.intNotes}
                   onChange={this.handleChange}
                 />
               </div>
@@ -161,7 +161,7 @@ class AddAppointments extends Component {
                   type="submit"
                   className="btn btn-primary d-block ml-auto"
                 >
-                  Add Appointment
+                  Add Interview
                 </button>
               </div>
             </div>
@@ -172,4 +172,4 @@ class AddAppointments extends Component {
   }
 }
 
-export default AddAppointments;
+export default AddInterviews;

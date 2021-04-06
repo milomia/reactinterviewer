@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 
-import AddAppointments from './AddAppointments';
-import SearchAppointments from './SearchAppointments';
-import ListAppointments from './ListAppointments';
+import AddInterviews from './AddInterviews';
+import SearchInterviews from './SearchInterviews';
+import ListInterviews from './ListInterviews';
 
 import { findIndex, without } from 'lodash';
 
@@ -11,18 +11,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      myAppointments: [],
+      myInterviews: [],
       formDisplay: false,
-      orderBy: 'petName',
+      orderBy: 'intDate',
       orderDir: 'asc',
-      queryText: '',
+      queryText: 'cunt',
       lastIndex: 0
     };
-    this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.deleteInterview = this.deleteInterview.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-    this.addAppointment = this.addAppointment.bind(this);
+    this.addInterview = this.addInterview.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
-    this.searchApts = this.searchApts.bind(this);
+    this.searchInterview = this.searchInterview.bind(this);
     this.updateInfo = this.updateInfo.bind(this);
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
     });
   }
 
-  searchApts(query) {
+  searchInterview(query) {
     this.setState({ queryText: query });
   }
 
@@ -44,32 +44,32 @@ class App extends Component {
   }
 
   updateInfo(name, value, id) {
-    let tempApts = this.state.myAppointments;
-    let aptIndex = findIndex(this.state.myAppointments, {
-      aptId: id
+    let tempInts = this.state.myInterviews;
+    let intIndex = findIndex(this.state.myInterviews, {
+      intId: id
     });
-    tempApts[aptIndex][name] = value;
+    tempInts[intIndex][name] = value;
     this.setState({
-      myAppointments: tempApts
+      myInterview: tempInts
     });
   }
 
-  addAppointment(apt) {
-    let tempApts = this.state.myAppointments;
-    apt.aptId = this.state.lastIndex;
-    tempApts.unshift(apt);
+  addInterview(int) {
+    let tempInts = this.state.myInterviews;
+    int.intId = this.state.lastIndex;
+    tempInts.unshift(int);
     this.setState({
-      myAppointments: tempApts,
+      myInterviews: tempInts,
       lastIndex: this.state.lastIndex + 1
     });
   }
 
-  deleteAppointment(apt) {
-    let tempApts = this.state.myAppointments;
-    tempApts = without(tempApts, apt);
+  deleteInterview(int) {
+    let tempInts = this.state.myInterviews;
+    tempInts = without(tempInts, int);
 
     this.setState({
-      myAppointments: tempApts
+      myInterviews: tempInts
     });
   }
 
@@ -77,27 +77,27 @@ class App extends Component {
     fetch('./data.json')
       .then(response => response.json())
       .then(result => {
-        const apts = result.map(item => {
-          item.aptId = this.state.lastIndex;
+        const ints = result.map(item => {
+          item.intId = this.state.lastIndex;
           this.setState({ lastIndex: this.state.lastIndex + 1 });
           return item;
         });
         this.setState({
-          myAppointments: apts
+          myInterviews: ints
         });
       });
   }
 
   render() {
     let order;
-    let filteredApts = this.state.myAppointments;
+    let filteredInts = this.state.myInterviews;
     if (this.state.orderDir === 'asc') {
       order = 1;
     } else {
       order = -1;
     }
 
-    filteredApts = filteredApts
+    filteredInts = filteredInts
       .sort((a, b) => {
         if (
           a[this.state.orderBy].toLowerCase() <
@@ -110,38 +110,38 @@ class App extends Component {
       })
       .filter(eachItem => {
         return (
-          eachItem['petName']
+          eachItem['companyName']
             .toLowerCase()
             .includes(this.state.queryText.toLowerCase()) ||
-          eachItem['ownerName']
+          eachItem['intName']
             .toLowerCase()
             .includes(this.state.queryText.toLowerCase()) ||
-          eachItem['aptNotes']
+          eachItem['intNotes']
             .toLowerCase()
             .includes(this.state.queryText.toLowerCase())
         );
       });
 
     return (
-      <main className="page bg-white" id="petratings">
+      <main className="page bg-white" id="intratings">
         <div className="container">
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddAppointments
+                <AddInterviews
                   formDisplay={this.state.formDisplay}
                   toggleForm={this.toggleForm}
-                  addAppointment={this.addAppointment}
+                  addInterview={this.addInterview}
                 />
-                <SearchAppointments
+                <SearchInterviews
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
                   changeOrder={this.changeOrder}
-                  searchApts={this.searchApts}
+                  searchInterview={this.searchInterview}
                 />
-                <ListAppointments
-                  appointments={filteredApts}
-                  deleteAppointment={this.deleteAppointment}
+                <ListInterviews
+                  interviews={filteredInts}
+                  deleteInterview={this.deleteInterview}
                   updateInfo={this.updateInfo}
                 />
               </div>

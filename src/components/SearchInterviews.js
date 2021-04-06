@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-class SearchAppointments extends Component {
+class SearchInterviews extends Component {
   render() {
     return (
-      <div className="search-appointments row justify-content-center my-4">
+      <div className="search-interviews row justify-content-center my-4">
         <div className="col-md-6">
           <div className="input-group">
             <input
-              id="SearchApts"
+              id="SearchInts"
               type="text"
               className="form-control"
-              aria-label="Search Appointments"
-              onChange={e => this.props.searchApts(e.target.value)}
+              aria-label="Search Interviews"
+              onChange={e => this.props.searchInterview(e.target.value)}
             />
             <div className="input-group-append">
               <button
@@ -28,22 +28,22 @@ class SearchAppointments extends Component {
                 <button
                   className={
                     'sort-by dropdown-item ' +
-                    (this.props.orderBy === 'petName' ? 'active' : '')
+                    (this.props.orderBy === 'companyName' ? 'active' : '')
                   }
                   onClick={e =>
-                    this.props.changeOrder('petName', this.props.orderDir)
+                    this.props.changeOrder('companyName', this.props.orderDir)
                   }
                   href="#"
                 >
-                  Pet Name
+                  Company Name
                 </button>
                 <button
                   className={
                     'sort-by dropdown-item ' +
-                    (this.props.orderBy === 'aptDate' ? 'active' : '')
+                    (this.props.orderBy === 'intDate' ? 'active' : '')
                   }
                   onClick={e =>
-                    this.props.changeOrder('aptDate', this.props.orderDir)
+                    this.props.changeOrder('intDate', this.props.orderDir)
                   }
                   href="#"
                 >
@@ -52,14 +52,14 @@ class SearchAppointments extends Component {
                 <button
                   className={
                     'sort-by dropdown-item ' +
-                    (this.props.orderBy === 'ownerName' ? 'active' : '')
+                    (this.props.orderBy === 'intName' ? 'active' : '')
                   }
                   onClick={e =>
-                    this.props.changeOrder('ownerName', this.props.orderDir)
+                    this.props.changeOrder('intName', this.props.orderDir)
                   }
                   href="#"
                 >
-                  Owner
+                  Interviewer Name
                 </button>
                 <div role="separator" className="dropdown-divider" />
                 <button
@@ -95,4 +95,4 @@ class SearchAppointments extends Component {
   }
 }
 
-export default SearchAppointments;
+export default SearchInterviews;

@@ -2,75 +2,75 @@ import React, { Component } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Moment from 'react-moment';
 
-class ListAppointments extends Component {
+class ListInterviews extends Component {
   render() {
     return (
-      <div className="appointment-list item-list mb-3">
-        {this.props.appointments.map(item => (
-          <div className="pet-item col media py-3" key={item.aptId}>
+      <div className="interview-list item-list mb-3">
+        {this.props.interviews.map(item => (
+          <div className="int-item col media py-3" key={item.intId}>
             <div className="mr-3">
               <button
-                className="pet-delete btn btn-sm btn-danger"
-                onClick={() => this.props.deleteAppointment(item)}
+                className="int-delete btn btn-sm btn-danger"
+                onClick={() => this.props.deleteInterview(item)}
               >
                 <FaTimes />
               </button>
             </div>
 
-            <div className="pet-info media-body">
-              <div className="pet-head d-flex">
+            <div className="int-info media-body">
+              <div className="int-head d-flex">
                 <span
-                  className="pet-name"
+                  className="int-name"
                   contentEditable
                   suppressContentEditableWarning
                   onBlur={e =>
                     this.props.updateInfo(
-                      'petName',
+                      'companyName',
                       e.target.innerText,
-                      item.aptId
+                      item.intId
                     )
                   }
                 >
-                  {item.aptId}--{item.petName}
+                  {item.intId}--{item.companyName}
                 </span>
-                <span className="apt-date ml-auto">
+                <span className="int-date ml-auto">
                   <Moment
-                    date={item.aptDate}
+                    date={item.intDate}
                     parse="YYYY-MM-dd hh:mm"
-                    format="MMM-d h:mma"
+                    format="DD-MMM-YYYY h:mma"
                   />
                 </span>
               </div>
 
-              <div className="owner-name">
-                <span className="label-item">Owner: </span>
+              <div className="int-name">
+                <span className="label-item">Interviewer: </span>
                 <span
                   contentEditable
                   suppressContentEditableWarning
                   onBlur={e =>
                     this.props.updateInfo(
-                      'ownerName',
+                      'intName',
                       e.target.innerText,
-                      item.aptId
+                      item.intId
                     )
                   }
                 >
-                  {item.ownerName}
+                  {item.intName}
                 </span>
               </div>
               <div
-                className="apt-notes"
+                className="int-notes"
                 contentEditable
                 suppressContentEditableWarning
                 onBlur={e =>
                   this.props.updateInfo(
-                    'aptNotes',
+                    'intNotes',
                     e.target.innerText,
-                    item.aptId
+                    item.intId
                   )
                 }
               >
-                {item.aptNotes}
+                {item.intNotes}
               </div>
             </div>
           </div>
@@ -80,4 +80,4 @@ class ListAppointments extends Component {
   }
 }
 
-export default ListAppointments;
+export default ListInterviews;
