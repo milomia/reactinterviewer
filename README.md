@@ -1,6 +1,5 @@
 # React: Building an Interface
 
-This is the repository for my course React: Building an Interface. The full course is available on LinkedIn Learning.
 
 ## Instructions
 
